@@ -121,9 +121,23 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
     }
 
     public async attemptClearAsync(): Promise<boolean> {
+        // Determine if the `errors` and `history` should be cleared.
         if (await this.shouldClear()) {
             await this.clear();
             return true;
+        } else {
+            // If not, attempt to load the `errors` and `history` from the store.
+            const object: StoreObject | null = await this._store.getItem(ErrorManager.STORE_KEY);
+
+            // If failed, clear the `errors` and `history` anyway.
+            if (object == null) {
+                await this.clear();
+                return true;
+            }
+
+            // Finally, set the `errors` and `history` to the loaded values.
+            this._history = object.history;
+            this._errors = object.errors;
         }
         return false;
     }
