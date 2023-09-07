@@ -10,7 +10,7 @@ No more guessing or vague descriptions of the error.
 ## Usage
 
 ```ts
-import { ErrorManager } from 'error-manager';
+import { ErrorManager } from '@sej/error-manager';
 
 // Create an instance of the ErrorManager
 const errorManager = ErrorManager.Instance;
