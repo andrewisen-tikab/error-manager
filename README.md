@@ -16,6 +16,13 @@ import { ErrorManager } from 'error-manager';
 const errorManager = ErrorManager.Instance;
 ```
 
+## Example
+
+See the [example](./example) folder for a working example.
+Or visit:
+
+[https://andrewisen-tikab.github.io/error-manager/example/](https://andrewisen-tikab.github.io/error-manager/example/)
+
 ## License
 
 MIT
