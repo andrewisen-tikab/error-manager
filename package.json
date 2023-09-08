@@ -2,6 +2,7 @@
     "name": "@andrewisen/error-manager",
     "version": "0.0.4",
     "type": "module",
+    "main": "dist/error-manager.js",
     "scripts": {
         "dev": "vite",
         "build": "tsc && vite build",
