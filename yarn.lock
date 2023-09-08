@@ -5,6 +5,25 @@ __metadata:
   version: 6
   cacheKey: 8
 
+"@andrewisen/error-manager@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@andrewisen/error-manager@workspace:."
+  dependencies:
+    "@types/file-saver": ^2.0.5
+    "@types/three": ^0.155.1
+    "@zip.js/zip.js": ^2.7.27
+    file-saver: ^2.0.5
+    jszip: ^3.10.1
+    localforage: ^1.10.0
+    stacktrace-js: ^2.0.2
+    three: ^0.156.0
+    typedoc: ^0.25.1
+    typescript: ^5.2.2
+    vite: ^4.4.5
+    vite-plugin-dts: ^3.5.3
+  languageName: unknown
+  linkType: soft
+
 "@babel/helper-string-parser@npm:^7.22.5":
   version: 7.22.5
   resolution: "@babel/helper-string-parser@npm:7.22.5"
@@ -809,25 +828,6 @@ __metadata:
   checksum: 8b7b1be20d2de12d2255c0bc2ca638b7af5171142693299416e6a9339bd7d88fc8d7707d913d78e0993176005405a236b066b45666b27b797252c771156ace54
   languageName: node
   linkType: hard
-
-"error-manager@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "error-manager@workspace:."
-  dependencies:
-    "@types/file-saver": ^2.0.5
-    "@types/three": ^0.155.1
-    "@zip.js/zip.js": ^2.7.27
-    file-saver: ^2.0.5
-    jszip: ^3.10.1
-    localforage: ^1.10.0
-    stacktrace-js: ^2.0.2
-    three: ^0.156.0
-    typedoc: ^0.25.1
-    typescript: ^5.2.2
-    vite: ^4.4.5
-    vite-plugin-dts: ^3.5.3
-  languageName: unknown
-  linkType: soft
 
 "error-stack-parser@npm:^2.0.6":
   version: 2.1.4
