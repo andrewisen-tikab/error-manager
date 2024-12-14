@@ -1,6 +1,27 @@
 import { DispatcherEvent, Listener } from '../types';
 
-export default class EventDispatcher {
+/**
+ * A class that manages event listeners and dispatches events.
+ *
+ * @remarks
+ * This class allows you to add, remove, and check for event listeners, as well as dispatch events to those listeners.
+ *
+ * @example
+ * ```typescript
+ * const dispatcher = new EventDispatcher();
+ *
+ * function onEvent(event: DispatcherEvent) {
+ *     console.log(event.type);
+ * }
+ *
+ * dispatcher.addEventListener('testEvent', onEvent);
+ * dispatcher.dispatchEvent({ type: 'testEvent' });
+ * dispatcher.removeEventListener('testEvent', onEvent);
+ * ```
+ *
+ * @public
+ */
+export class EventDispatcher {
     private _listeners: { [type: string]: Listener[] } = {};
 
     /**
