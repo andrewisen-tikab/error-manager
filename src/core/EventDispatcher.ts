@@ -21,7 +21,7 @@ import { DispatcherEvent, Listener } from '../types';
  *
  * @public
  */
-export default class EventDispatcher {
+export class EventDispatcher {
     private _listeners: { [type: string]: Listener[] } = {};
 
     /**

@@ -10,7 +10,7 @@ import {
     StoreObject,
 } from './types';
 import { createInstance } from 'localforage';
-import EventDispatcher from './core/EventDispatcher';
+import { EventDispatcher } from './core/EventDispatcher';
 import { EVENT_TYPES } from './constants';
 import { getUser } from './utils';
 
