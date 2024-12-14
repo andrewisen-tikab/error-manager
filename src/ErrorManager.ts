@@ -98,8 +98,9 @@ export class ErrorManager extends EventDispatcher implements AbstractErrorManage
         super();
         this._errors = [];
         this._history = [];
-        this._store = store;
+
         if (attemptClear) this.attemptClearAsync();
+        if (store !== undefined) this._store = store;
     }
 
     /**
@@ -169,7 +170,7 @@ export class ErrorManager extends EventDispatcher implements AbstractErrorManage
      * @private
      */
     private async _saveAsync(): Promise<void> {
-        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+        if (this._store == null) throw new Error(STORE_NOT_DEFINED);
         const storeObject: StoreObject = {
             errors: this._errors,
             history: this._history,
@@ -187,7 +188,7 @@ export class ErrorManager extends EventDispatcher implements AbstractErrorManage
      * @returns {Promise<void>} A promise that resolves when the store has been updated.
      */
     async clear(): Promise<void> {
-        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+        if (this._store == null) throw new Error(STORE_NOT_DEFINED);
 
         this._errors = [];
         this._history = [];
@@ -215,7 +216,7 @@ export class ErrorManager extends EventDispatcher implements AbstractErrorManage
      * 6. If loading from the store succeeds, sets the errors and history to the loaded values and returns `false`.
      */
     public async attemptClearAsync(): Promise<boolean> {
-        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+        if (this._store == null) throw new Error(STORE_NOT_DEFINED);
 
         // Determine if the `errors` and `history` should be cleared.
         if (await this.shouldClear()) {
@@ -244,7 +245,7 @@ export class ErrorManager extends EventDispatcher implements AbstractErrorManage
      * @returns `true` if the `errors` and `history` were cleared.
      */
     protected async shouldClear(): Promise<boolean> {
-        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+        if (this._store == null) throw new Error(STORE_NOT_DEFINED);
 
         // If in debug mode, always clear
         if (ErrorManager.DEBUG) return true;
