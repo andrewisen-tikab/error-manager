@@ -31,7 +31,7 @@ const STORE_NOT_DEFINED = 'Store is not defined.' as const;
  *
  * No data will be sent to any server. You need to add that yourself :)
  */
-export default class ErrorManager extends EventDispatcher implements AbstractErrorManager {
+export class ErrorManager extends EventDispatcher implements AbstractErrorManager {
     /**
      * {@link ErrorManager} singleton
      */

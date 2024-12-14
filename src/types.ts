@@ -14,6 +14,9 @@ export type AbstractObject = {
      * @param json JSON string.
      */
     fromJSON: (json: string) => void;
+    /**
+     * The date and time when the object was created.
+     */
     timestamp: Date;
 };
 
@@ -89,11 +92,20 @@ export type AbstractErrorManager = {
     attemptClearAsync: () => Promise<boolean>;
 };
 
+/**
+ * Represents the structure of the store object.
+ *
+ * @property {AbstractErrorObject[]} errors - An array of error objects.
+ * @property {AbstractHistoryObject[]} history - An array of history objects.
+ */
 export type StoreObject = {
     errors: AbstractErrorObject[];
     history: AbstractHistoryObject[];
 };
 
+/**
+ * Represents an object where each key is a string and each value is also a string.
+ */
 export type ExportObject = {
     [key: string]: string;
 };

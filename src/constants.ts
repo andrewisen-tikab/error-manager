@@ -1,3 +1,6 @@
+/**
+ * An object containing various event types used in the application.
+ */
 export const EVENT_TYPES = {
     /**
      * A generic error event.
