@@ -10,7 +10,8 @@
         "preview": "vite preview",
         "ts": "tsc",
         "docs": "typedoc",
-        "test": "vitest"
+        "test": "vitest run",
+        "test:dev": "vitest dev"
     },
     "devDependencies": {
         "@types/file-saver": "^2.0.5",
