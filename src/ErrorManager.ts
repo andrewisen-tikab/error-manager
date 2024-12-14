@@ -9,11 +9,12 @@ import {
     ExportObject,
     StoreObject,
 } from './types';
-import { INDEXEDDB, createInstance } from 'localforage';
+import { createInstance } from 'localforage';
 import EventDispatcher from './core/EventDispatcher';
 import { EVENT_TYPES } from './constants';
 import { getUser } from './utils';
 
+const STORE_NOT_DEFINED = 'Store is not defined.' as const;
 /**
  * Error manager that handles the application's `errors` and the user's `history`.
  *
@@ -52,7 +53,7 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
      */
     private _history: AbstractHistoryObject[];
 
-    private _store: LocalForage;
+    private _store?: ReturnType<typeof createInstance>;
 
     /**
      * Generate {@link ViewerOverlord} singleton
@@ -61,14 +62,21 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
         return this._instance || (this._instance = new this());
     }
 
-    constructor(attemptClear: boolean = true) {
+    /**
+     * Create a new instance of {@link ErrorManager}
+     * @param attemptClear
+     * @param store
+     * ```typescript
+     * createInstance({
+     * name: ErrorManager.STORE_NAME,
+     * driver: INDEXEDDB,
+     * });
+     */
+    constructor(attemptClear: boolean = true, store?: ReturnType<typeof createInstance>) {
         super();
         this._errors = [];
         this._history = [];
-        this._store = createInstance({
-            name: ErrorManager.STORE_NAME,
-            driver: INDEXEDDB,
-        });
+        this._store = store;
         if (attemptClear) this.attemptClearAsync();
     }
 
@@ -103,6 +111,7 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
     }
 
     private async _saveAsync(): Promise<void> {
+        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
         const storeObject: StoreObject = {
             errors: this._errors,
             history: this._history,
@@ -111,6 +120,8 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
     }
 
     async clear(): Promise<void> {
+        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+
         this._errors = [];
         this._history = [];
         const storeObject: StoreObject = {
@@ -121,6 +132,8 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
     }
 
     public async attemptClearAsync(): Promise<boolean> {
+        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+
         // Determine if the `errors` and `history` should be cleared.
         if (await this.shouldClear()) {
             await this.clear();
@@ -148,6 +161,8 @@ export default class ErrorManager extends EventDispatcher implements AbstractErr
      * @returns `true` if the `errors` and `history` were cleared.
      */
     protected async shouldClear(): Promise<boolean> {
+        if (this._store === undefined) throw new Error(STORE_NOT_DEFINED);
+
         // If in debug mode, always clear
         if (ErrorManager.DEBUG) return true;
 
